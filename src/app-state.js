@@ -1,3 +1,5 @@
-export default appState = {
+const appState = {
   cards: []
 }
+
+export {appState}
