@@ -8,11 +8,11 @@ export default function Form(props) {
         <form onSubmit={props.submit}>
           <div className="form-group text-left">
             <label htmlFor="inputQuestion" className="mr-2">Question:</label>
-            <input name="question" type="text" id="questionInput" size="48" placeholder="Enter card question here"/>
+            <input name="question" type="text" id="questionInput" size="56" placeholder="Enter card question here"/>
           </div>
           <div className="form-group text-left">
             <label htmlFor="inputAnswer" className="mr-3">Answer:</label>
-            <input type="text" id="answerInput" name="answer" size="48" placeholder="Enter card answer here"/>
+            <input type="text" id="answerInput" name="answer" size="56" placeholder="Enter card answer here"/>
           </div>
           <button type="submit" className="btn btn-primary">Save</button>
         </form>
