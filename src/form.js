@@ -1,5 +1,11 @@
 import React from 'react'
 
+const style = {
+  card: {
+    width: '32rem'
+  }
+}
+
 export default class Form extends React.Component {
   constructor(props) {
     super(props)
@@ -16,11 +22,6 @@ export default class Form extends React.Component {
     event.target.reset()
   }
   render() {
-    const style = {
-      card: {
-        width: '32rem'
-      }
-    }
     return (
       <div className="card mx-auto mt-5 text-center" style={style.card}>
         <div className="card-header text-left">Create a Flash Card</div>

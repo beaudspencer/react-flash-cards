@@ -10,7 +10,7 @@ export default class App extends React.Component {
     this.addCard = this.addCard.bind(this)
   }
   addCard(card) {
-    const addCard = this.state.cards.map(card => Object.assign({}, card))
+    const addCard = this.state.cards.slice()
     addCard.push(card)
     this.setState({cards: addCard})
   }
