@@ -1,11 +1,12 @@
 import React from 'react'
 import Form from './form.js'
-import {appState} from './app-state.js'
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = appState
+    this.state = {
+      cards: []
+    }
     this.addCard = this.addCard.bind(this)
   }
   addCard(card) {
