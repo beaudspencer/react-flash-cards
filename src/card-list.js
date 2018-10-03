@@ -9,12 +9,12 @@ export default function CardList(props) {
         <a className="btn btn-primary mt-3" role="button" href="#new">Make a Card</a>
       </div>}
       {props.cards.length > 0 &&
-      <div className="row ml-1 mt-3">
-        <ul className="list-inline">
+      <div className="container-fluid">
+        <div className="row justify-content-start">
           {props.cards.map((card, index) => {
             return <Card key={index} card={card}/>
           })}
-        </ul>
+        </div>
       </div>
       }
     </React.Fragment>
