@@ -24,7 +24,7 @@ export default class Form extends React.Component {
   render() {
     return (
       <div className="card mx-auto mt-5 text-center" style={style.card}>
-        <div className="card-header text-left">Create a Flash Card</div>
+        <div className="card-header text-left">{this.props.mode === 'edit' && 'Edit a Card'}{this.props.mode === 'new' && 'Make a Card'}</div>
         <div className="card-body">
           <form onSubmit={this.handleSubmit}>
             <div className="form-group text-left">
@@ -40,5 +40,5 @@ export default class Form extends React.Component {
         </div>
       </div>
     )
-}
+  }
 }
