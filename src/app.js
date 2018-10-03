@@ -10,6 +10,12 @@ export default class App extends React.Component {
     }
     this.addCard = this.addCard.bind(this)
   }
+  componentDidMount() {
+    window.addEventListener('hashchange', () => {
+      // going to do something soon
+      console.log('yo')
+    })
+  }
   addCard(card) {
     const addCard = this.state.cards.slice()
     addCard.push(card)
