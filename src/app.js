@@ -9,7 +9,10 @@ export default class App extends React.Component {
     super(props)
     this.state = {
       cards: JSON.parse(localStorage.getItem('cards')) || [],
-      view: hash.parse(location.hash) || 'list'
+      view: {
+        path: hash.parse(location.hash).path || 'list',
+        params: hash.parse(location.hash).params
+      }
     }
     this.addCard = this.addCard.bind(this)
   }
