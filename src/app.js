@@ -14,11 +14,9 @@ export default class App extends React.Component {
     this.addCard = this.addCard.bind(this)
   }
   componentDidMount() {
-    const hashEvent = new Event('hashchange')
     window.addEventListener('hashchange', () => {
       this.setState({view: hash.parse(location.hash)})
     })
-    window.dispatchEvent(hashEvent)
   }
   addCard(card) {
     const addCard = this.state.cards.slice()
