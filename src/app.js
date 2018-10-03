@@ -2,6 +2,7 @@ import React from 'react'
 import Form from './form.js'
 import Navbar from './navbar.js'
 import hash from './hash.js'
+import CardList from './card-list.js'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -13,9 +14,11 @@ export default class App extends React.Component {
     this.addCard = this.addCard.bind(this)
   }
   componentDidMount() {
+    const hashEvent = new Event('hashchange')
     window.addEventListener('hashchange', () => {
       this.setState({view: hash.parse(location.hash)})
     })
+    window.dispatchEvent(hashEvent)
   }
   addCard(card) {
     const addCard = this.state.cards.slice()
@@ -27,6 +30,7 @@ export default class App extends React.Component {
       <React.Fragment>
         <Navbar/>
         {this.state.view === 'new' && <Form submit={this.addCard}/>}
+        {this.state.view === 'list' && <CardList cards={this.state.cards}/>}
       </React.Fragment>
     )
   }
