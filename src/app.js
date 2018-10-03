@@ -8,7 +8,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      cards: [],
+      cards: JSON.parse(localStorage.getItem('cards')) || [],
       view: hash.parse(location.hash) || 'list'
     }
     this.addCard = this.addCard.bind(this)
@@ -16,6 +16,10 @@ export default class App extends React.Component {
   componentDidMount() {
     window.addEventListener('hashchange', () => {
       this.setState({view: hash.parse(location.hash)})
+    })
+    window.addEventListener('beforeunload', () => {
+      const myCards = JSON.stringify(this.state.cards)
+      localStorage.setItem('cards', myCards)
     })
   }
   addCard(card) {
