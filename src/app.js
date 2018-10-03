@@ -7,8 +7,9 @@ import CardList from './card-list.js'
 export default class App extends React.Component {
   constructor(props) {
     super(props)
+    this.savedCards = localStorage.getItem('cards')
     this.state = {
-      cards: [],
+      cards: JSON.parse(this.savedCards) || [],
       view: hash.parse(location.hash) || 'list'
     }
     this.addCard = this.addCard.bind(this)
