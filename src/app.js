@@ -34,8 +34,8 @@ export default class App extends React.Component {
     return (
       <React.Fragment>
         <Navbar/>
-        {(this.state.view === 'new' || this.state.view === 'edit') && <Form submit={this.addCard} edit={this.editCard} type={this.state.view}/>}
-        {this.state.view === 'list' && <CardList cards={this.state.cards}/>}
+        {(this.state.view.path === 'new' || this.state.view === 'edit') && <Form submit={this.addCard} edit={this.editCard} type={this.state.view}/>}
+        {this.state.view.path === 'list' && <CardList cards={this.state.cards}/>}
       </React.Fragment>
     )
   }

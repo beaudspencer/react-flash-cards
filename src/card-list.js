@@ -12,7 +12,7 @@ export default function CardList(props) {
       <div className="container-fluid">
         <div className="row justify-content-start">
           {props.cards.map((card, index) => {
-            return <Card key={index} card={card}/>
+            return <Card id={index} key={index} card={card}/>
           })}
         </div>
       </div>
