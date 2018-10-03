@@ -17,6 +17,10 @@ export default class App extends React.Component {
     window.addEventListener('hashchange', () => {
       this.setState({view: hash.parse(location.hash)})
     })
+    window.addEventListener('beforeunload', () => {
+      const myCards = JSON.stringify(this.state.cards)
+      localStorage.setItem('cards', myCards)
+    })
   }
   addCard(card) {
     const addCard = this.state.cards.slice()
