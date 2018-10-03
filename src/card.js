@@ -3,7 +3,7 @@ import React from 'react'
 const style = {
   card: {
     width: '20rem',
-    height: '12rem'
+    height: '8rem'
   }
 }
 
