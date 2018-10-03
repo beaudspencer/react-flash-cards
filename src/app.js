@@ -1,5 +1,6 @@
 import React from 'react'
 import Form from './form.js'
+import Navbar from './navbar.js'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -16,7 +17,10 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <Form submit={this.addCard}/>
+      <React.Fragment>
+        <Navbar/>
+        <Form submit={this.addCard}/>
+      </React.Fragment>
     )
   }
 }

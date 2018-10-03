@@ -5,9 +5,11 @@ export default class Navbar extends React.Component {
     super(props)
   }
   render() {
-    <div>
-      <a href="#list">Cards</a>
-      <a href="new">New</a>
-    </div>
+    return (
+      <div className="mt-3">
+        <a href="#list" className="m-3 text-primary">Cards</a>
+        <a href="#new"className="text-primary">New</a>
+      </div>
+    )
   }
 }
