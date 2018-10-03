@@ -9,7 +9,7 @@ export default class App extends React.Component {
     super(props)
     this.state = {
       cards: [],
-      view: 'list'
+      view: hash.parse(location.hash) || 'list'
     }
     this.addCard = this.addCard.bind(this)
   }
