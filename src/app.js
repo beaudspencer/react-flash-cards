@@ -16,6 +16,7 @@ export default class App extends React.Component {
       nextId: JSON.parse(localStorage.getItem('id')) || 0
     }
     this.submitHandler = this.submitHandler.bind(this)
+    this.findCard = this.findCard.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -24,8 +25,7 @@ export default class App extends React.Component {
     window.addEventListener('beforeunload', () => {
       const myCards = JSON.stringify(this.state.cards)
       localStorage.setItem('cards', myCards)
-      const currentId = JSON.stringify(this.state.nextId)
-      localStorage.setItem('id', currentId)
+      localStorage.setItem('id', this.state.nextId)
     })
   }
   submitHandler(card) {
@@ -46,11 +46,15 @@ export default class App extends React.Component {
         nextId: this.state.nextId + 1})
     }
   }
+  findCard() {
+    const currentCard = Object.assign({}, this.state.cards.find(card => card.cardId === parseInt(this.state.view.params.cardId, 10)))
+    return currentCard
+  }
   render() {
     return (
       <React.Fragment>
         <Navbar/>
-        {(this.state.view.path === 'new' || this.state.view.path === 'edit') && <Form submit={this.submitHandler} nextId={this.state.nextId} cards={this.state.cards} params={this.state.view.params} mode={this.state.view.path}/>}
+        {(this.state.view.path === 'new' || this.state.view.path === 'edit') && <Form submit={this.submitHandler} nextId={this.state.nextId} card={this.findCard} mode={this.state.view.path}/>}
         {this.state.view.path === 'list' && <CardList cards={this.state.cards}/>}
       </React.Fragment>
     )
