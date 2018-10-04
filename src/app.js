@@ -12,7 +12,8 @@ export default class App extends React.Component {
       view: {
         path: hash.parse(location.hash).path || 'list',
         params: hash.parse(location.hash).params
-      }
+      },
+      nextId: 0
     }
     this.addCard = this.addCard.bind(this)
   }
@@ -28,13 +29,14 @@ export default class App extends React.Component {
   addCard(card) {
     const addCard = this.state.cards.slice()
     addCard.push(card)
-    this.setState({cards: addCard})
+    this.setState({cards: addCard,
+      nextId: this.state.nextId + 1})
   }
   render() {
     return (
       <React.Fragment>
         <Navbar/>
-        {(this.state.view.path === 'new' || this.state.view === 'edit') && <Form submit={this.addCard} edit={this.editCard} type={this.state.view}/>}
+        {(this.state.view.path === 'new' || this.state.view.path === 'edit') && <Form submit={this.addCard} nextId={this.state.nextID} edit={this.editCard} mode={this.state.view.path}/>}
         {this.state.view.path === 'list' && <CardList cards={this.state.cards}/>}
       </React.Fragment>
     )

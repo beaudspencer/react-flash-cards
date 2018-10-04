@@ -15,6 +15,7 @@ export default class Form extends React.Component {
     event.preventDefault()
     const newCardData = new FormData(event.target)
     const newCard = {
+      cardID: this.props.nextId,
       question: newCardData.get('question'),
       answer: newCardData.get('answer')
     }

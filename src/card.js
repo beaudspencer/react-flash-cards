@@ -16,7 +16,7 @@ export default function Card(props) {
           <p className="card-text">{props.card.answer}</p>
         </div>
         <div className="card-footer">
-          <i className="fas fa-edit float-right" id={props.id}></i>
+          <i className="fas fa-edit float-right" id={props.id} onClick={props.function}></i>
         </div>
       </div>
     </div>
