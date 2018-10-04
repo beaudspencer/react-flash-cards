@@ -50,12 +50,19 @@ export default class App extends React.Component {
     const currentCard = Object.assign({}, this.state.cards.find(card => card.cardId === parseInt(this.state.view.params.cardId, 10)))
     return currentCard
   }
+  currentView(path) {
+    if (path === 'new' || path === 'edit') {
+      return <Form submit={this.submitHandler} nextId={this.state.nextId} card={this.findCard} mode={this.state.view.path}/>
+    }
+    else {
+      return <CardList cards={this.state.cards}/>
+    }
+  }
   render() {
     return (
       <React.Fragment>
         <Navbar/>
-        {(this.state.view.path === 'new' || this.state.view.path === 'edit') && <Form submit={this.submitHandler} nextId={this.state.nextId} card={this.findCard} mode={this.state.view.path}/>}
-        {this.state.view.path === 'list' && <CardList cards={this.state.cards}/>}
+        {this.currentView(this.state.view.path)}
       </React.Fragment>
     )
   }
