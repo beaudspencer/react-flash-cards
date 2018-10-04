@@ -21,8 +21,8 @@ export default function CardList(props) {
       {props.cards.length > 0 &&
       <div className="container-fluid">
         <div className="row justify-content-start">
-          {props.cards.map((card, index) => {
-            return <Card id={index} function={cardInfo} key={index} card={card}/>
+          {props.cards.map((card) => {
+            return <Card id={card.cardId} function={cardInfo} key={card.cardId} card={card}/>
           })}
         </div>
       </div>
