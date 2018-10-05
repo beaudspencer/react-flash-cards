@@ -1,5 +1,6 @@
 import React from 'react'
 import QuizCard from './quiz-card.js'
+import ProgressBar from './progress-bar.js'
 
 export default class Practice extends React.Component {
   constructor(props) {
@@ -8,22 +9,23 @@ export default class Practice extends React.Component {
       cards: this.props.cards,
       shown: false
     }
-    this.nextCard = this.nextCard.bind(this)
-    this.prevCard = this.prevCard.bind(this)
-    this.toggleAnswer = this.toggleAnswer.bind(this)
     this.style = {
       left: {
-        top: '8rem',
-        left: '10rem'
+        top: '13rem',
+        left: '14vw'
       },
       right: {
-        top: '8rem',
-        right: '10rem'
+        top: '13rem',
+        right: '14vw'
       },
       card: {
         top: '8rem'
       }
     }
+    this.nextCard = this.nextCard.bind(this)
+    this.prevCard = this.prevCard.bind(this)
+    this.toggleAnswer = this.toggleAnswer.bind(this)
+    this.calcPercentDone = this.calcPercentDone.bind(this)
   }
   nextCard() {
     this.setState({current: this.state.current + 1,
@@ -36,9 +38,14 @@ export default class Practice extends React.Component {
   toggleAnswer() {
     this.setState({shown: !this.state.shown})
   }
+  calcPercentDone() {
+    return Math.floor(((this.state.current + 1) / this.state.cards.length) * 100)
+  }
   render() {
+    const percent = this.calcPercentDone()
     return (
       <div className="text-center mt-5">
+        <ProgressBar percent={percent}/>
         <div
           className="d-inline-block position-absolute" style={this.style.left}>
           <i
