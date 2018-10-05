@@ -13,10 +13,11 @@ export default class App extends React.Component {
         path: hash.parse(location.hash).path || 'list',
         params: hash.parse(location.hash).params
       },
-      nextId: JSON.parse(localStorage.getItem('id')) || 0
+      nextId: JSON.parse(localStorage.getItem('id')) || 1
     }
     this.submitHandler = this.submitHandler.bind(this)
     this.findCard = this.findCard.bind(this)
+    this.deleteCard = this.deleteCard.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -28,8 +29,19 @@ export default class App extends React.Component {
       localStorage.setItem('id', this.state.nextId)
     })
   }
+  deleteCard(card) {
+    const deletedCardIndex = this.state.cards.findIndex(curr =>
+      curr.cardId === card.cardId)
+    const before = this.state.cards.slice(0, deletedCardIndex)
+    const after = this.state.cards.slice(deletedCardIndex + 1)
+    const newCards = [...before, ...after]
+    this.setState({
+      cards: newCards
+    })
+  }
   editCard(card) {
-    const changeCardIndex = this.state.cards.findIndex(curr => curr.cardId === card.cardId)
+    const changeCardIndex = this.state.cards.findIndex(curr =>
+      curr.cardId === card.cardId)
     const before = this.state.cards.slice(0, changeCardIndex)
     const after = this.state.cards.slice(changeCardIndex + 1)
     const newCards = [...before, card, ...after]
@@ -49,7 +61,9 @@ export default class App extends React.Component {
     location.hash = '#list'
   }
   findCard() {
-    const currentCard = Object.assign({}, this.state.cards.find(card => card.cardId === parseInt(this.state.view.params.cardId, 10)))
+    const currentCard = Object.assign({},
+      this.state.cards.find(card =>
+        card.cardId === parseInt(this.state.view.params.cardId, 10)))
     return currentCard
   }
   currentView(path, card) {
@@ -57,7 +71,7 @@ export default class App extends React.Component {
       return <Form submit={this.submitHandler} card={card}/>
     }
     else {
-      return <CardList cards={this.state.cards}/>
+      return <CardList cards={this.state.cards} remove={this.deleteCard}/>
     }
   }
   render() {

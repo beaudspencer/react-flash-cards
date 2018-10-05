@@ -23,8 +23,13 @@ export default function Card(props) {
           <p className="card-text">{props.card.answer}</p>
         </div>
         <div className="card-footer">
+          <a href="#list" onClick={() => {
+            props.remove(props.card)
+          }}>
+            <i className="far fa-trash-alt float-right mr-1"></i>
+          </a>
           <a href={hash.stringify(newLocation)}>
-            <i className="fas fa-edit float-right" id={props.id}></i>
+            <i className="fas fa-edit float-right mr-3" id={props.id}></i>
           </a>
         </div>
       </div>
