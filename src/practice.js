@@ -19,6 +19,9 @@ export default class Practice extends React.Component {
       right: {
         top: '8rem',
         right: '10rem'
+      },
+      card: {
+        top: '8rem'
       }
     }
   }
@@ -48,6 +51,7 @@ export default class Practice extends React.Component {
         <QuizCard card={this.state.cards[this.state.current]}
           toggle={this.toggleAnswer}
           shown={this.state.shown}
+          key={this.state.current}
         />
         <div
           className="d-inline-block position-absolute" style={this.style.right}>
