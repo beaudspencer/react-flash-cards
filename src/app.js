@@ -30,7 +30,8 @@ export default class App extends React.Component {
     })
   }
   deleteCard(card) {
-    const deletedCardIndex = this.state.cards.findIndex(curr => curr.cardId === card.cardId)
+    const deletedCardIndex = this.state.cards.findIndex(curr =>
+      curr.cardId === card.cardId)
     const before = this.state.cards.slice(0, deletedCardIndex)
     const after = this.state.cards.slice(deletedCardIndex + 1)
     const newCards = [...before, ...after]
@@ -39,7 +40,8 @@ export default class App extends React.Component {
     })
   }
   editCard(card) {
-    const changeCardIndex = this.state.cards.findIndex(curr => curr.cardId === card.cardId)
+    const changeCardIndex = this.state.cards.findIndex(curr =>
+      curr.cardId === card.cardId)
     const before = this.state.cards.slice(0, changeCardIndex)
     const after = this.state.cards.slice(changeCardIndex + 1)
     const newCards = [...before, card, ...after]
@@ -59,7 +61,9 @@ export default class App extends React.Component {
     location.hash = '#list'
   }
   findCard() {
-    const currentCard = Object.assign({}, this.state.cards.find(card => card.cardId === parseInt(this.state.view.params.cardId, 10)))
+    const currentCard = Object.assign({},
+      this.state.cards.find(card =>
+        card.cardId === parseInt(this.state.view.params.cardId, 10)))
     return currentCard
   }
   currentView(path, card) {

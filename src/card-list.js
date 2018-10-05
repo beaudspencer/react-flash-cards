@@ -6,13 +6,19 @@ export default function CardList(props) {
     <React.Fragment>
       {props.cards.length === 0 && <div className="text-center mt-5">
         <h2>You have no cards saved</h2>
-        <a className="btn btn-primary mt-3" role="button" href="#new">Make a Card</a>
+        <a className="btn btn-primary mt-3" role="button" href="#new">
+        Make a Card
+        </a>
       </div>}
       {props.cards.length > 0 &&
       <div className="container-fluid">
         <div className="row justify-content-start">
           {props.cards.map((card) => {
-            return <Card id={card.cardId} key={card.cardId} remove={props.remove} card={card}/>
+            return <Card
+              id={card.cardId}
+              key={card.cardId}
+              remove={props.remove}
+              card={card}/>
           })}
         </div>
       </div>

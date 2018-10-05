@@ -10,7 +10,9 @@ export default class Form extends React.Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.state = this.props.card.cardId ? this.props.card : {question: '', answer: ''}
+    this.state = this.props.card.cardId
+      ? this.props.card
+      : {question: '', answer: ''}
     this.handleChange = this.handleChange.bind(this)
   }
   handleSubmit(event) {
