@@ -1,4 +1,5 @@
 import React from 'react'
+import hash from './hash.js'
 
 const style = {
   card: {
@@ -8,6 +9,12 @@ const style = {
 }
 
 export default function Card(props) {
+  const newLocation = {
+    path: 'edit',
+    params: {
+      cardId: props.id
+    }
+  }
   return (
     <div className="col mt-3">
       <div className="card" style={style.card}>
@@ -16,7 +23,9 @@ export default function Card(props) {
           <p className="card-text">{props.card.answer}</p>
         </div>
         <div className="card-footer">
-          <i className="fas fa-edit float-right" id={props.id} onClick={props.function}></i>
+          <a href={hash.stringify(newLocation)}>
+            <i className="fas fa-edit float-right" id={props.id}></i>
+          </a>
         </div>
       </div>
     </div>
