@@ -28,41 +28,44 @@ export default class App extends React.Component {
       localStorage.setItem('id', this.state.nextId)
     })
   }
+  editCard(card) {
+    const changeCardIndex = this.state.cards.findIndex(curr => curr.cardId === card.cardId)
+    const before = this.state.cards.slice(0, changeCardIndex)
+    const after = this.state.cards.slice(changeCardIndex + 1)
+    const newCards = [...before, card, ...after]
+    this.setState({
+      cards: newCards
+    })
+  }
+  addCard(card) {
+    card.cardId = this.state.nextId
+    const addCard = this.state.cards.slice()
+    addCard.push(card)
+    this.setState({cards: addCard,
+      nextId: this.state.nextId + 1})
+  }
   submitHandler(card) {
-    if (this.state.view.path === 'edit') {
-      const changeCardIndex = this.state.cards.findIndex(curr => curr.cardId === card.cardId)
-      const before = this.state.cards.slice(0, changeCardIndex)
-      const after = this.state.cards.slice(changeCardIndex + 1)
-      const newCards = [...before, card, ...after]
-      this.setState({
-        cards: newCards
-      })
-      location.hash = '#list'
-    }
-    else if (this.state.view.path === 'new') {
-      const addCard = this.state.cards.slice()
-      addCard.push(card)
-      this.setState({cards: addCard,
-        nextId: this.state.nextId + 1})
-    }
+    card.cardId ? this.editCard(card) : this.addCard(card)
+    location.hash = '#list'
   }
   findCard() {
     const currentCard = Object.assign({}, this.state.cards.find(card => card.cardId === parseInt(this.state.view.params.cardId, 10)))
     return currentCard
   }
-  currentView(path) {
+  currentView(path, card) {
     if (path === 'new' || path === 'edit') {
-      return <Form submit={this.submitHandler} nextId={this.state.nextId} card={this.findCard} mode={this.state.view.path}/>
+      return <Form submit={this.submitHandler} card={card}/>
     }
     else {
       return <CardList cards={this.state.cards}/>
     }
   }
   render() {
+    const card = this.findCard()
     return (
       <React.Fragment>
         <Navbar/>
-        {this.currentView(this.state.view.path)}
+        {this.currentView(this.state.view.path, card)}
       </React.Fragment>
     )
   }
