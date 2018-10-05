@@ -23,7 +23,9 @@ export default function Card(props) {
           <p className="card-text">{props.card.answer}</p>
         </div>
         <div className="card-footer">
-          <a href="#list">
+          <a href="#list" onClick={() => {
+            props.remove(props.card)
+          }}>
             <i className="far fa-trash-alt float-right mr-1"></i>
           </a>
           <a href={hash.stringify(newLocation)}>
