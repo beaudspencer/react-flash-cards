@@ -10,6 +10,9 @@ export default function Navbar() {
         <li className="navbar-item ml-3">
           <a href="#new"className="navbar-link">New</a>
         </li>
+        <li className="navbar-item ml-3">
+          <a href="#practice"className="navbar-link">Practice</a>
+        </li>
       </ul>
     </nav>
   )

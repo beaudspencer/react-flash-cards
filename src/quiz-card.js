@@ -1,33 +1,27 @@
 import React from 'react'
 
-export default class QuizCard extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {shown: false}
-    this.toggleAnswer = this.toggleAnswer.bind(this)
+const style = {
+  card: {
+    width: '42rem'
   }
-  toggleAnswer() {
-    this.setState({show: !this.state.shown})
-  }
-
-  render() {
-    return (
-      <div className="card">
-        <div className="card-body">
-          <h3 className="card-title">{this.props.card.question}</h3>
-          <div onClick={this.toggleAnswer}>
-            <i
-              className={
-                this.state.shown ? 'fas fa-angle-down' : 'fas fa-angle-right'
-              }>
-            </i>
-            <p className="card-text">Show Answer</p>
-          </div>
-          <p className={this.state.shown ? 'card-text' : 'd-none'}>
-            {this.props.card.answer}
-          </p>
+}
+export default function QuizCard(props) {
+  return (
+    <div className="card d-inline-block" style={style.card}>
+      <div className="card-body">
+        <h3 className="card-title">{props.card.question}</h3>
+        <div onClick={props.toggle}>
+          <i
+            className={
+              props.shown ? 'fas fa-angle-down' : 'fas fa-angle-right'
+            }>
+          </i>
+          <p className="card-text d-inline-block ml-2">Show Answer</p>
         </div>
+        <p className={props.shown ? 'card-text' : 'd-none'}>
+          {props.card.answer}
+        </p>
       </div>
-    )
-  }
+    </div>
+  )
 }
