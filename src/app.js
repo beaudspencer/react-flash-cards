@@ -3,6 +3,7 @@ import Form from './form.js'
 import Navbar from './navbar.js'
 import hash from './hash.js'
 import CardList from './card-list.js'
+import Practice from './practice.js'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -69,6 +70,9 @@ export default class App extends React.Component {
   currentView(path, card) {
     if (path === 'new' || path === 'edit') {
       return <Form submit={this.submitHandler} card={card}/>
+    }
+    else if (path === 'practice') {
+      return <Practice cards={this.state.cards}/>
     }
     else {
       return <CardList cards={this.state.cards} remove={this.deleteCard}/>
