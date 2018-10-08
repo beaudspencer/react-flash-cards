@@ -17,6 +17,13 @@ export default class CardList extends React.Component {
     }
   }
   render() {
+    const topics = []
+    this.props.cards
+      .filter((card) => {
+        if (!topics.includes(card.topic)) {
+          topics.push(card)
+        }
+      })
     const renderCards = this.props.cards
       .filter((card) => {
         if (this.state.show !== 'none') {
@@ -34,7 +41,7 @@ export default class CardList extends React.Component {
         </div>}
         {this.props.cards.length > 0 &&
         <React.Fragment>
-          <FilterDrop cards={this.props.cards} sort={this.sort}/>
+          <FilterDrop topics={topics} sort={this.sort}/>
           <div className="container-fluid">
             <div className="row justify-content-start">
               {renderCards.map((card) => {
