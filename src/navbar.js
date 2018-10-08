@@ -3,7 +3,7 @@ import React from 'react'
 export default function Navbar() {
   return (
     <nav className="navbar navbar-expand navbar-light bg-primary">
-      <span className="navbar-brand text-warning">Flash Cards</span>
+      <span className="navbar-brand text-white">Flash Cards</span>
       <ul className="navbar-nav">
         <li className="navbar-item">
           <a href="#list" className="navbar-link text-light">Cards</a>
