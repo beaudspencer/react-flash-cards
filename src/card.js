@@ -20,7 +20,7 @@ export default function Card(props) {
       <div className="card" style={style.card}>
         <div className="card-body">
           <h5 className="card-title">{props.card.question}</h5>
-          <p className="card-text">{props.card.answer}</p>
+          <p className="card-text text-truncate">{props.card.answer}</p>
         </div>
         <div className="card-footer">
           <p className="card-text mb-0 d-inline-block">{`Topic: ${props.card.topic}`}</p>
