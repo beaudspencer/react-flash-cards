@@ -7,13 +7,21 @@ export default class FilterDrop extends React.Component {
     this.toggler = this.toggler.bind(this)
   }
   toggler() {
-    return this.state.toggle ? 'd-none' : 'd-block'
+    this.setState({toggle: !this.state.toggle})
   }
   render() {
+    const drop = this.state.toggle ? 'd-block' : 'd-none'
     return (
       <div className="dropdown">
-        <button>Filter By:</button>
-        <div className="dropdown-menu"></div>
+        <button onClick={this.toggler} className="btn btn-primary mt-3 ml-1">Filter By:</button>
+        <div>
+          {this.props.cards
+            .filter((card, index, self) => self.indexOf(card) === index)
+            .map((card) => {
+              return <button key={card.topic} onClick={this.props.sort} className={drop + ' btn btn-secondary m-1'}>{card.topic}</button>
+            })}
+          <button onClick={this.props.sort} className={drop + ' btn btn-secondary m-1'}>none</button>
+        </div>
       </div>
     )
   }
