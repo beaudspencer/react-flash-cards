@@ -12,7 +12,7 @@ export default class Form extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.state = this.props.card.cardId
       ? this.props.card
-      : {question: '', answer: ''}
+      : {question: '', answer: '', topic: ''}
     this.handleChange = this.handleChange.bind(this)
   }
   handleSubmit(event) {
@@ -20,7 +20,8 @@ export default class Form extends React.Component {
     const newCardData = new FormData(event.target)
     this.setState({
       question: newCardData.get('question'),
-      answer: newCardData.get('answer')
+      answer: newCardData.get('answer'),
+      topic: newCardData.get('topic')
     })
     this.props.submit(this.state)
     event.target.reset()
@@ -57,6 +58,18 @@ export default class Form extends React.Component {
                 className="form-control"
                 placeholder="Enter card answer here"
                 value={this.state.answer}/>
+            </div>
+            <div className="form-group text-left">
+              <label htmlFor="inputTopic" className="mr-3">Topic:</label>
+              <input
+                onChange={this.handleChange}
+                type="text"
+                id="inputTopic"
+                name="topic"
+                maxLength="12"
+                className="form-control"
+                placeholder="Enter card topic here"
+                value={this.state.topic}/>
             </div>
             <button type="submit" className="btn btn-primary">Save</button>
           </form>
