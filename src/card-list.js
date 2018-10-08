@@ -10,21 +10,17 @@ export default class CardList extends React.Component {
     this.sort = this.sort.bind(this)
   }
   sort(event) {
-    if (!event) {
-      this.setState({show: 'none'})
-    }
-    else {
-      this.setState({show: event.target.value})
-    }
+    this.setState({show: event.target.value})
   }
   render() {
-    const topics = []
-    this.props.cards
-      .filter((card) => {
-        if (!topics.includes(card.topic)) {
-          topics.push(card)
+    const topics = this.props.cards
+      .reduce((acc, card) => {
+        if (!acc.includes(card.topic)) {
+          acc.push(card.topic)
+          return acc
         }
-      })
+      }, [])
+    console.log(topics)
     const renderCards = this.props.cards
       .filter((card) => {
         if (this.state.show !== 'none') {

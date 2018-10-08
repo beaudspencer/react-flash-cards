@@ -5,8 +5,8 @@ export default function FilterDrop(props) {
     <div>
       <select defaultValue="none" className="m-3" id="topicSelect" onChange={props.sort}>
         {props.topics
-          .map((card) => {
-            return <option key={card.cardId} value={card.topic}>{card.topic}</option>
+          .map((topic) => {
+            return <option key={topic} value={topic}>{topic}</option>
           })}
         <option value="none">none</option>
       </select>
