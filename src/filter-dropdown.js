@@ -1,27 +1,15 @@
 import React from 'react'
 
-export default class FilterDrop extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {toggle: false}
-    this.toggler = this.toggler.bind(this)
-  }
-  toggler() {
-    this.setState({toggle: !this.state.toggle})
-  }
-  render() {
-    const drop = this.state.toggle ? 'd-block' : 'd-none'
-    return (
-      <div className="dropdown">
-        <button onClick={this.toggler} className="btn btn-primary mt-3 ml-1">Filter By:</button>
-        <div>
-          {this.props.topics
-            .map((card) => {
-              return <button key={card.cardId} onClick={this.props.sort} className={drop + ' btn btn-secondary m-1'}>{card.topic}</button>
-            })}
-          <button onClick={this.props.sort} className={drop + ' btn btn-secondary m-1'}>none</button>
-        </div>
-      </div>
-    )
-  }
+export default function FilterDrop(props) {
+  return (
+    <div>
+      <select defaultValue="none" className="m-3" id="topicSelect" onChange={props.sort}>
+        {props.topics
+          .map((card) => {
+            return <option key={card.cardId} value={card.topic}>{card.topic}</option>
+          })}
+        <option value="none">none</option>
+      </select>
+    </div>
+  )
 }

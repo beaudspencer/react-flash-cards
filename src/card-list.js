@@ -1,5 +1,6 @@
 import React from 'react'
-import Card from './card.js'
+import NoCards from './no-cards.js'
+import Cards from './cards'
 import FilterDrop from './filter-dropdown.js'
 
 export default class CardList extends React.Component {
@@ -13,7 +14,7 @@ export default class CardList extends React.Component {
       this.setState({show: 'none'})
     }
     else {
-      this.setState({show: event.target.innerHTML})
+      this.setState({show: event.target.value})
     }
   }
   render() {
@@ -33,27 +34,12 @@ export default class CardList extends React.Component {
       })
     return (
       <React.Fragment>
-        {this.props.cards.length === 0 && <div className="text-center mt-5">
-          <h2>You have no cards saved</h2>
-          <a className="btn btn-primary mt-3" role="button" href="#new">
-          Make a Card
-          </a>
-        </div>}
+        {this.props.cards.length === 0 && <NoCards/>}
         {this.props.cards.length > 0 &&
-        <React.Fragment>
-          <FilterDrop topics={topics} sort={this.sort}/>
-          <div className="container-fluid">
-            <div className="row justify-content-start">
-              {renderCards.map((card) => {
-                return <Card
-                  id={card.cardId}
-                  key={card.cardId}
-                  remove={this.props.remove}
-                  card={card}/>
-              })}
-            </div>
-          </div>
-        </React.Fragment>
+          <React.Fragment>
+            <FilterDrop topics={topics} sort={this.sort}/>
+            <Cards cards={renderCards} remove={this.props.remove}/>
+          </React.Fragment>
         }
       </React.Fragment>
     )
