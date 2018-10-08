@@ -66,6 +66,7 @@ export default class Form extends React.Component {
                 type="text"
                 id="inputTopic"
                 name="topic"
+                maxLength="12"
                 className="form-control"
                 placeholder="Enter card topic here"
                 value={this.state.topic}/>
