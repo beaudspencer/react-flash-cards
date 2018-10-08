@@ -17,6 +17,13 @@ export default class CardList extends React.Component {
     }
   }
   render() {
+    const renderCards = this.props.cards
+      .filter((card) => {
+        if (this.state.show !== 'none') {
+          return card.topic === this.state.show
+        }
+        return card
+      })
     return (
       <React.Fragment>
         {this.props.cards.length === 0 && <div className="text-center mt-5">
@@ -30,20 +37,13 @@ export default class CardList extends React.Component {
           <FilterDrop cards={this.props.cards} sort={this.sort}/>
           <div className="container-fluid">
             <div className="row justify-content-start">
-              {this.props.cards
-                .filter((card) => {
-                  if (this.state.show !== 'none') {
-                    return card.topic === this.state.show
-                  }
-                  return card
-                })
-                .map((card) => {
-                  return <Card
-                    id={card.cardId}
-                    key={card.cardId}
-                    remove={this.props.remove}
-                    card={card}/>
-                })}
+              {renderCards.map((card) => {
+                return <Card
+                  id={card.cardId}
+                  key={card.cardId}
+                  remove={this.props.remove}
+                  card={card}/>
+              })}
             </div>
           </div>
         </React.Fragment>
