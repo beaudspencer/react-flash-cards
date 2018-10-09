@@ -52,6 +52,7 @@ export default class App extends React.Component {
   }
   addCard(card) {
     card.cardId = this.state.nextId
+    card.difficultyIndex = 0
     const addCard = this.state.cards.slice()
     addCard.push(card)
     this.setState({cards: addCard,
