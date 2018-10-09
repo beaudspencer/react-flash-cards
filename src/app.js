@@ -19,6 +19,7 @@ export default class App extends React.Component {
     this.submitHandler = this.submitHandler.bind(this)
     this.findCard = this.findCard.bind(this)
     this.deleteCard = this.deleteCard.bind(this)
+    this.updateDifficulty = this.updateDifficulty.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -52,6 +53,7 @@ export default class App extends React.Component {
   }
   addCard(card) {
     card.cardId = this.state.nextId
+    card.difficultyIndex = 0
     const addCard = this.state.cards.slice()
     addCard.push(card)
     this.setState({cards: addCard,
@@ -72,11 +74,28 @@ export default class App extends React.Component {
       return <Form submit={this.submitHandler} card={card}/>
     }
     else if (path === 'practice') {
-      return <Practice cards={this.state.cards}/>
+      return <Practice
+        cards={this.state.cards}
+        handleDifficulty={this.updateDifficulty}/>
     }
     else {
       return <CardList cards={this.state.cards} remove={this.deleteCard}/>
     }
+  }
+  updateDifficulty(value, index) {
+    const card = Object.assign({}, this.state.cards[index])
+    const before = this.state.cards.slice(0, index)
+    const after = this.state.cards.slice(index + 1)
+    if (value === 'fail') {
+      card.difficultyIndex = 0
+    }
+    else {
+      card.difficultyIndex++
+    }
+    const newCards = [...before, card, ...after]
+    this.setState({
+      cards: newCards
+    })
   }
   render() {
     const card = this.findCard()
