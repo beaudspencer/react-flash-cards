@@ -27,6 +27,11 @@ export default class Practice extends React.Component {
     this.prevCard = this.prevCard.bind(this)
     this.toggleAnswer = this.toggleAnswer.bind(this)
     this.calcPercentDone = this.calcPercentDone.bind(this)
+    this.updateDiffCall = this.updateDiffCall.bind(this)
+  }
+  updateDiffCall(event) {
+    const selected = event.target.value
+    this.props.handleDifficulty(selected, this.state.current)
   }
   nextCard() {
     this.setState({current: this.state.current + 1,
@@ -62,7 +67,7 @@ export default class Practice extends React.Component {
         />
         <DifficultyButtons
           card={this.state.cards[this.state.current]}
-          handleDifficulty={this.props.handleDifficulty}
+          handleDifficulty={this.updateDiffCall}
         />
         <div
           className="d-inline-block position-absolute" style={this.style.right}>

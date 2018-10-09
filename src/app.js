@@ -82,7 +82,20 @@ export default class App extends React.Component {
       return <CardList cards={this.state.cards} remove={this.deleteCard}/>
     }
   }
-  updateDifficulty(event) {
+  updateDifficulty(value, index) {
+    const card = Object.assign({}, this.state.cards[index])
+    const before = this.state.cards.slice(0, index)
+    const after = this.state.cards.slice(index + 1)
+    if (value === 'fail') {
+      card.difficultyIndex = 0
+    }
+    else {
+      card.difficultyIndex++
+    }
+    const newCards = [...before, card, ...after]
+    this.setState({
+      cards: newCards
+    })
   }
   render() {
     const card = this.findCard()
