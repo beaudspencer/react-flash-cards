@@ -19,6 +19,7 @@ export default class App extends React.Component {
     this.submitHandler = this.submitHandler.bind(this)
     this.findCard = this.findCard.bind(this)
     this.deleteCard = this.deleteCard.bind(this)
+    this.updateDifficulty = this.updateDifficulty.bind(this)
   }
   componentDidMount() {
     window.addEventListener('hashchange', () => {
@@ -73,11 +74,15 @@ export default class App extends React.Component {
       return <Form submit={this.submitHandler} card={card}/>
     }
     else if (path === 'practice') {
-      return <Practice cards={this.state.cards}/>
+      return <Practice
+        cards={this.state.cards}
+        handleDifficulty={this.updateDifficulty}/>
     }
     else {
       return <CardList cards={this.state.cards} remove={this.deleteCard}/>
     }
+  }
+  updateDifficulty(event) {
   }
   render() {
     const card = this.findCard()

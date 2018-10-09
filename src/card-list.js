@@ -13,14 +13,13 @@ export default class CardList extends React.Component {
     this.setState({show: event.target.value})
   }
   render() {
-    const topics = this.props.cards
-      .reduce((acc, card) => {
-        if (!acc.includes(card.topic)) {
-          acc.push(card.topic)
-          return acc
-        }
-      }, [])
-    console.log(topics)
+    const topics = this.props.cards.reduce((acc, card) => {
+      if (!acc.includes(card.topic)) {
+        acc.push(card.topic)
+        return acc
+      }
+      return acc
+    }, [])
     const renderCards = this.props.cards
       .filter((card) => {
         if (this.state.show !== 'none') {

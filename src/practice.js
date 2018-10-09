@@ -1,6 +1,7 @@
 import React from 'react'
 import QuizCard from './quiz-card.js'
 import ProgressBar from './progress-bar.js'
+import DifficultyButtons from './difficulty-buttons.js'
 
 export default class Practice extends React.Component {
   constructor(props) {
@@ -51,14 +52,17 @@ export default class Practice extends React.Component {
           <i
             onClick={this.prevCard}
             className={
-              (this.state.current > 0)
-                ? 'fas fa-angle-double-left' : 'd-none'}
-          ></i>
+              (this.state.current > 0) ? 'fas fa-angle-double-left' : 'd-none'}>
+          </i>
         </div>
         <QuizCard card={this.state.cards[this.state.current]}
           toggle={this.toggleAnswer}
           shown={this.state.shown}
           key={this.state.current}
+        />
+        <DifficultyButtons
+          card={this.state.cards[this.state.current]}
+          handleDifficulty={this.props.handleDifficulty}
         />
         <div
           className="d-inline-block position-absolute" style={this.style.right}>
