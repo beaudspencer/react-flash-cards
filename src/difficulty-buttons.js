@@ -13,14 +13,12 @@ const style = {
 
 export default function DifficultyButtons(props) {
   return (
-    <div style={style.container}>
+    <div style={style.container} onClick={props.handleDifficulty}>
       <button
-        onClick={props.handleDifficulty}
         className="btn btn-primary mr-2"
         value="pass"
         style={style.button}>Pass</button>
       <button
-        onClick={props.handleDifficulty}
         className="btn btn-danger ml-2"
         value="fail"
         style={style.button}>Fail</button>
