@@ -1,6 +1,8 @@
 # react-flash-cards
 A React.js application for self-learners who want to expand their knowledge
 
+Live-Link: https://react-flash-card-app.herokuapp.com/
+
 Technologies used : 
 
 - React.js
