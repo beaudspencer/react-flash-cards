@@ -3,7 +3,7 @@ import Form from './form.js'
 import Navbar from './navbar.js'
 import hash from './hash.js'
 import CardList from './card-list.js'
-import Practice from './practice.js'
+import PracticeContainer from './practice-container'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -74,9 +74,10 @@ export default class App extends React.Component {
       return <Form submit={this.submitHandler} card={card}/>
     }
     else if (path === 'practice') {
-      return <Practice
+      return <PracticeContainer
         cards={this.state.cards}
-        handleDifficulty={this.updateDifficulty}/>
+        handleDifficulty={this.updateDifficulty}
+      />
     }
     else {
       return <CardList cards={this.state.cards} remove={this.deleteCard}/>
