@@ -2,6 +2,7 @@ import React from 'react'
 import QuizCard from './quiz-card.js'
 import ProgressBar from './progress-bar.js'
 import DifficultyButtons from './difficulty-buttons.js'
+import NoCards from './no-cards'
 
 export default class Practice extends React.Component {
   constructor(props) {
@@ -49,37 +50,42 @@ export default class Practice extends React.Component {
   }
   render() {
     const percent = this.calcPercentDone()
+    const { cards } = this.props
     return (
-      <div className="text-center mt-5">
-        <ProgressBar percent={percent}/>
-        <div
-          className="d-inline-block position-absolute" style={this.style.left}>
-          <i
-            onClick={this.prevCard}
-            className={
-              (this.state.current > 0) ? 'fas fa-angle-double-left' : 'd-none'}>
-          </i>
+      cards.length >= 1
+        ? <div className="text-center mt-5">
+          <ProgressBar percent={percent}/>
+          <div
+            className="d-inline-block position-absolute" style={this.style.left}>
+            <i
+              onClick={this.prevCard}
+              className={
+                (this.state.current > 0) ? 'fas fa-angle-double-left' : 'd-none'}>
+            </i>
+          </div>
+          <QuizCard card={this.state.cards[this.state.current]}
+            toggle={this.toggleAnswer}
+            shown={this.state.shown}
+            key={this.state.current}
+          />
+          <DifficultyButtons
+            card={this.state.cards[this.state.current]}
+            handleDifficulty={this.updateDiffCall}
+          />
+          <div
+            className="d-inline-block position-absolute" style={this.style.right}>
+            <i
+              onClick={this.nextCard}
+              className={(this.state.current < this.state.cards.length - 1)
+                ? 'fas fa-angle-double-right'
+                : 'd-none'
+              }
+            ></i>
+          </div>
         </div>
-        <QuizCard card={this.state.cards[this.state.current]}
-          toggle={this.toggleAnswer}
-          shown={this.state.shown}
-          key={this.state.current}
-        />
-        <DifficultyButtons
-          card={this.state.cards[this.state.current]}
-          handleDifficulty={this.updateDiffCall}
-        />
-        <div
-          className="d-inline-block position-absolute" style={this.style.right}>
-          <i
-            onClick={this.nextCard}
-            className={(this.state.current < this.state.cards.length - 1)
-              ? 'fas fa-angle-double-right'
-              : 'd-none'
-            }
-          ></i>
+        : <div>
+          <NoCards/>
         </div>
-      </div>
     )
   }
 }
