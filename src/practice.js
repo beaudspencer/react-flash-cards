@@ -7,7 +7,8 @@ import NoCards from './no-cards'
 export default class Practice extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {current: 0,
+    this.state = {
+      current: 0,
       cards: this.props.cards,
       shown: false
     }
@@ -33,6 +34,10 @@ export default class Practice extends React.Component {
   updateDiffCall(event) {
     const selected = event.target.value
     this.props.handleDifficulty(selected, this.state.current)
+    const { cards, current } = this.state
+    if (cards.length === current - 1) {
+      this.props.next()
+    }
   }
   nextCard() {
     this.setState({current: this.state.current + 1,
