@@ -5,6 +5,7 @@ export default class PracticeContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      session: 0,
       current: 0,
       boxes: {
         one: null,
@@ -13,6 +14,32 @@ export default class PracticeContainer extends React.Component {
       }
     }
     this.boxCards = this.boxCards.bind(this)
+  }
+  next() {
+    const { session, current } = this.state
+    if (session === 0 && current === 0) {
+      this.setState({
+        session: 1,
+        current: 0
+      })
+    }
+    else if (session === 1 && current === 1) {
+      this.setState({
+        session: 2,
+        current: 0
+      })
+    }
+    else if (session === 2 && current === 2) {
+      this.setState({
+        session: 0,
+        current: 0
+      })
+    }
+    else {
+      this.setState({
+        current: current + 1
+      })
+    }
   }
   boxCards() {
     const { boxes } = this.state
@@ -44,6 +71,7 @@ export default class PracticeContainer extends React.Component {
     const { boxes, current } = this.state
     return (
       <Practice
+        next={this.next}
         cards={boxes[current]}
         handleDifficult={this.props.handleDifficulty}
       />
