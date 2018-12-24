@@ -63,7 +63,6 @@ export default class PracticeContainer extends React.Component {
     if (boxes[current].length === 0) {
       this.next()
     }
-    console.log(boxes[current])
     return (
       <React.Fragment>
         <div className="text-center mt-5">

@@ -61,7 +61,6 @@ export default class Practice extends React.Component {
   render() {
     const percent = this.calcPercentDone()
     const { cards } = this.props
-    console.log(cards)
     return (
       cards.length >= 1
         ? <div className="text-center mt-5">
