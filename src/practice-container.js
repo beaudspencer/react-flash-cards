@@ -6,14 +6,10 @@ export default class PracticeContainer extends React.Component {
     super(props)
     this.state = {
       session: 0,
-      current: 0,
-      boxes: {
-        one: null,
-        two: null,
-        three: null
-      }
+      current: 0
     }
     this.boxCards = this.boxCards.bind(this)
+    this.next = this.next.bind(this)
   }
   next() {
     const { session, current } = this.state
@@ -42,11 +38,10 @@ export default class PracticeContainer extends React.Component {
     }
   }
   boxCards() {
-    const { boxes } = this.state
     const { cards } = this.props
-    const boxOne = boxes.one.slice()
-    const boxTwo = boxes.two.slice()
-    const boxThree = boxes.three.slice()
+    const boxOne = []
+    const boxTwo = []
+    const boxThree = []
     cards.forEach(card => {
       switch (card.difficultyIndex) {
         case 0 :
@@ -59,21 +54,16 @@ export default class PracticeContainer extends React.Component {
           boxThree.push(card)
       }
     })
-    this.setState({
-      boxes: {
-        one: boxOne,
-        two: boxTwo,
-        three: boxThree
-      }
-    })
+    return [boxOne, boxTwo, boxThree]
   }
   render() {
-    const { boxes, current } = this.state
+    const { current } = this.state
+    const boxes = this.boxCards()
     return (
       <Practice
         next={this.next}
         cards={boxes[current]}
-        handleDifficult={this.props.handleDifficulty}
+        handleDifficulty={this.props.handleDifficulty}
       />
     )
   }
