@@ -6,7 +6,8 @@ export default class PracticeContainer extends React.Component {
     super(props)
     this.state = {
       session: 0,
-      current: 0
+      current: 0,
+      boxes: this.boxCards()
     }
     this.boxCards = this.boxCards.bind(this)
     this.next = this.next.bind(this)
@@ -28,7 +29,8 @@ export default class PracticeContainer extends React.Component {
     else if (session === 2 && current === 2) {
       this.setState({
         session: 0,
-        current: 0
+        current: 0,
+        boxes: this.boxCards()
       })
     }
     else {
@@ -57,17 +59,30 @@ export default class PracticeContainer extends React.Component {
     return [boxOne, boxTwo, boxThree]
   }
   render() {
-    const { current } = this.state
-    const boxes = this.boxCards()
+    const { current, boxes, session } = this.state
     if (boxes[current].length === 0) {
       this.next()
     }
+    console.log(boxes[current])
     return (
-      <Practice
-        next={this.next}
-        cards={boxes[current]}
-        handleDifficulty={this.props.handleDifficulty}
-      />
+      <React.Fragment>
+        <div className="text-center mt-5">
+          <h2>
+            {
+              `Session: ${session + 1}`
+            }
+            <br/>
+            {
+              `Box: ${current + 1}`
+            }
+          </h2>
+        </div>
+        <Practice
+          next={this.next}
+          cards={boxes[current]}
+          handleDifficulty={this.props.handleDifficulty}
+        />
+      </React.Fragment>
     )
   }
 }
