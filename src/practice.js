@@ -33,11 +33,15 @@ export default class Practice extends React.Component {
   }
   updateDiffCall(event) {
     const selected = event.target.value
-    this.props.handleDifficulty(selected, this.state.current)
     const { cards, current } = this.state
-    if (cards.length === current - 1) {
+    this.props.handleDifficulty(selected, this.state.current)
+    if (cards.length === current + 1) {
+      this.setState({
+        current: 0
+      })
       this.props.next()
     }
+    this.nextCard()
   }
   nextCard() {
     this.setState({current: this.state.current + 1,
