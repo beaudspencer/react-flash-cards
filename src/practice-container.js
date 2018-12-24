@@ -59,6 +59,9 @@ export default class PracticeContainer extends React.Component {
   render() {
     const { current } = this.state
     const boxes = this.boxCards()
+    if (boxes[current].length === 0) {
+      this.next()
+    }
     return (
       <Practice
         next={this.next}
