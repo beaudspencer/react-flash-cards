@@ -9,7 +9,6 @@ export default class Practice extends React.Component {
     super(props)
     this.state = {
       current: 0,
-      cards: this.props.cards,
       shown: false
     }
     this.style = {
@@ -33,13 +32,15 @@ export default class Practice extends React.Component {
   }
   updateDiffCall(event) {
     const selected = event.target.value
-    const { cards, current } = this.state
+    const { current } = this.state
+    const { cards } = this.props
     this.props.handleDifficulty(selected, this.state.current)
     if (cards.length === current + 1) {
       this.setState({
         current: 0
       })
       this.props.next()
+      return
     }
     this.nextCard()
   }
@@ -55,11 +56,12 @@ export default class Practice extends React.Component {
     this.setState({shown: !this.state.shown})
   }
   calcPercentDone() {
-    return Math.floor(((this.state.current + 1) / this.state.cards.length) * 100)
+    return Math.floor(((this.state.current + 1) / this.props.cards.length) * 100)
   }
   render() {
     const percent = this.calcPercentDone()
     const { cards } = this.props
+    console.log(cards)
     return (
       cards.length >= 1
         ? <div className="text-center mt-5">
@@ -72,20 +74,20 @@ export default class Practice extends React.Component {
                 (this.state.current > 0) ? 'fas fa-angle-double-left' : 'd-none'}>
             </i>
           </div>
-          <QuizCard card={this.state.cards[this.state.current]}
+          <QuizCard card={cards[this.state.current]}
             toggle={this.toggleAnswer}
             shown={this.state.shown}
             key={this.state.current}
           />
           <DifficultyButtons
-            card={this.state.cards[this.state.current]}
+            card={cards[this.state.current]}
             handleDifficulty={this.updateDiffCall}
           />
           <div
             className="d-inline-block position-absolute" style={this.style.right}>
             <i
               onClick={this.nextCard}
-              className={(this.state.current < this.state.cards.length - 1)
+              className={(this.state.current < cards.length - 1)
                 ? 'fas fa-angle-double-right'
                 : 'd-none'
               }
