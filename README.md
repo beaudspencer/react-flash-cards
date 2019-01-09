@@ -1,4 +1,4 @@
-# react-flash-cards
+# React Flash Cards
 A React.js application for self-learners who want to expand their knowledge
 
 Live-Link: https://react-flash-card-app.herokuapp.com/
